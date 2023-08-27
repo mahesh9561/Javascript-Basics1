@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+        .card {
+          box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+          transition: 0.3s;
+          width: 40%;
+        }
+        
+        .card:hover {
+          box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+        
+        .container {
+          padding: 2px 16px;
+        }
+        </style>
+  </head>
+  <body style="background-color: #656565">
+    <div class="card">
+      <img id ="avtar" src="" alt="Avatar" style="width: 100%" />
+      <div class="container">
+        <h4 id ="name"></h4>
+        <p id=""><b></b></p>
+      </div>
+    </div>
+  </body>
+  <script>
+    const requestUrl = "https://api.github.com/users/mahesh9561";
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", requestUrl);
+    // console.log("Heere")
+    xhr.onreadystatechange = function () {
+      console.log(xhr.readyState);
+      if (xhr.readyState === 4) {
+        const data = JSON.parse(this.responseText);
+        console.log(data);
+        console.log(data.updated_at);
+
+        document.getElementById('avtar').src = data.avatar_url;
+        document.querySelector('#name').textContent = data.name;
+
+      }
+    };
+    xhr.send();
+  </script>
+</html>
+<!-- api.github.com/users/mahesh9561 -->
